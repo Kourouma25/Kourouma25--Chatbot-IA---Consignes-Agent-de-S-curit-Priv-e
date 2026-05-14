@@ -1,0 +1,31 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from backend.database import Base, engine
+from backend.routes import users, auth_routes
+
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI(
+    title="Backend Chatbot Consignes Sécurité",
+    description="API backend avec PostgreSQL pour gérer agents, responsables et authentification.",
+    version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(users.router)
+app.include_router(auth_routes.router)
+
+
+@app.get("/")
+def home():
+    return {
+        "message": "Backend Chatbot Consignes Sécurité opérationnel"
+    }

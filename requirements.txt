@@ -8,3 +8,12 @@ pypdf
 docx2txt
 tiktoken
 sentence-transformers
+
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-jose
+passlib[bcrypt]
+python-multipart
+email-validator
